@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>О проекте - FastJob</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./media/icon.png">
+</head>
+<body>
+  <div class="banner">Добро пожаловать на FastJob!</div>
+
+  <header class="header">
+    <div class="logo">FastJob</div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="jobs.html">Вакансии</a>
+      <a href="add.html">Добавить вакансию</a>
+      <a href="about.html">О проекте</a>
+    </nav>
+    <div class="header-info">
+      <div id="greeting"></div>
+      <div id="clock"></div>
+    </div>
+  </header>
+
+  <main class="fadeIn">
+    <div class="about-box fadeIn">
+      <h1>О проекте FastJob</h1>
+      <p>FastJob – это проект, который является сайтом вакансий.</p>
+      <p>Данный проект предоставляет возможность быстрого размещения вакансий и поиска работы.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-box">
+        <p>© 2025 FastJob. Все права защищены.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://vk.com/ti.clown">Контакт</a>
+        <a href="Konf.html">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKxjrft9DTOcNnCX_0IJq1eFSjjHZcodg",
+      authDomain: "fastjob-2b261.firebaseapp.com",
+      databaseURL: "https://fastjob-2b261-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "fastjob-2b261",
+      storageBucket: "fastjob-2b261.firebasestorage.app",
+      messagingSenderId: "743732468676",
+      appId: "1:743732468676:web:590823fb2fbc24087f6291"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+/* 
+   ЛОГИКА ПОЯВЛЕНИЯ (ИСПРАВЛЕННАЯ)
+ */
+
+
+/* По умолчанию сайт ВИДЕН (защита от белого экрана) */
+html {
+    opacity: 1;
+}
+
+
+/*
+   Этот класс добавляется скриптом в самом начале загрузки.
+   Только тогда мы скрываем сайт.
+*/
+html.js-loading {
+    opacity: 0;
+    transition: opacity 0.2s ease-in; /* Плавное появление */
+}
+
+
+/* Класс полной загрузки (возвращаем видимость) */
+html.loaded {
+    opacity: 1;
+}
+
+
+/* 
+   ОБЩИЕ СТИЛИ (RESET & BODY)
+ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    background-image: none;
+}
+
+
+/* === БОКОВЫЕ ПОЛОСЫ (ПОВЕРХ ВСЕГО) === */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 10%;
+    /* Убедитесь, что путь к картинке верный! */
+    background-image: url("media/abstract-template-blue-background-white-squares-free-vector.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+body::before { left: 0; }
+body::after { right: 0; transform: scaleX(-1); }
+
+
+/* ====== Баннер ====== */
+.banner {
+    width: 100%;
+    background: #0073b1;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+
+/* ====== ШАПКА (HEADER) ====== */
+header {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 100;
+}
+
+
+.header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: transparent;
+}
+
+
+/* Логотип */
+.logo {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #0073b1;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+
+/* Меню */
+.nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex: 1;
+    margin-left: 40px;
+}
+
+
+.nav a {
+    text-decoration: none;
+    color: #0073b1;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+
+.nav a:hover {
+    background: #0073b1;
+    color: #fff;
+}
+
+
+.header-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+
+/* ====== Основные контейнеры (Main) ====== */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
+    flex-direction: column;
+
+
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+
+/* Главная страница */
+.main-column {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.welcome-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+/* Секция с вакансиями и фильтром */
+.jobs-with-filter {
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+.jobs-list-container { flex: 2; }
+.section-title {
+    color: #0073b1;
+    margin-bottom: 15px;
+}
+.filter-sidebar {
+    flex: 1;
+    max-width: 320px;
+}
+.filter-title { margin-top: 0; }
+
+
+/* Детали вакансии */
+.job-detail-main {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+.job-detail-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+.back-link-wrapper {
+    text-align: center;
+    margin-top: 20px;
+}
+.back-link {
+    color: #0073b1;
+    text-decoration: none;
+    font-weight: 500;
+}
+.back-link:hover { text-decoration: underline; }
+
+
+/* ====== Блоки ====== */
+.account-box, .add-box, .job-form-box, .about-box, .container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
+.account-box h1, .add-box h1, .job-form-box h1, .about-box h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #0073b1;
+}
+
+
+/* Поля форм */
+.account-box input, .add-box input, .add-box textarea,
+.job-form-box input, .job-form-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+.add-box textarea { resize: vertical; }
+
+
+/* Кнопки */
+.account-box button, .add-box button, .job-form-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #0073b1;
+    color: #fff;
+}
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+.btn-secondary { background: #777 !important; }
+
+
+/* Карточки вакансий */
+.job-card {
+    background: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.job-card a {
+    text-decoration: none;
+    color: #0073b1;
+}
+.job-meta {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 5px;
+}
+
+
+/* Детали внутри вакансии */
+.job-detail-info { margin: 15px 0; }
+.job-detail-title { color: #0073b1; margin-top: 0; }
+.job-detail-description {
+    margin: 20px 0;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+.job-detail-description h3 { color: #0073b1; }
+.job-detail-description p { line-height: 1.6; white-space: pre-wrap; }
+.detail-link { color: #0073b1; }
+
+
+.response-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #0073b1;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+
+/* Календарь */
+.calendar-box {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 40px auto;
+    position: relative;
+    z-index: 20;
+}
+.calendar-box h2 {
+    margin-bottom: 10px;
+    color: #0073b1;
+}
+
+
+/* About */
+.about-box {
+    background: #0073b1;
+    color: #fff;
+}
+.about-box p { font-size: 1rem; margin: 10px 0; }
+.about-box h1 { color: #fff; }
+
+
+/* ====== Футер ====== */
+footer {
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 40px 20px;
+    margin-top: auto;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.footer-box {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
+.footer-box p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+}
+.footer-links { margin-top: 15px; }
+.footer-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+}
+.footer-links a:hover { color: #3498db; }
+
+
+/* Блок "Почему выбирают нас" */
+.why-us {
+    width: 100%;
+    padding: 60px 20px 70px;
+    background: linear-gradient(180deg, #f8fbff 0%, #f4f7fb 100%);
+    margin-top: 40px;
+    border-radius: 8px;
+}
+.why-us-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+.why-us-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #6296f5;
+    margin-bottom: 10px;
+}
+.why-us-underline {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #1f7e5b, #22b4a8);
+    margin: 0 auto 40px;
+    border-radius: 999px;
+}
+.why-us-items {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+.why-us-item {
+    max-width: 280px;
+    text-align: center;
+    color: #333;
+}
+.why-us-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #eef4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #0073b1;
+    margin: 0 auto 18px;
+    box-shadow: 0 8px 20px rgba(0, 115, 177, 0.15);
+}
+.why-us-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+}
+.why-us-item p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+
+/* 
+   МОБИЛЬНАЯ АДАПТАЦИЯ
+ */
+@media(max-width:1024px){
+    main { width: 95%; }
+    body::before, body::after { width: 5%; }
+
+
+    .header { padding: 10px 15px; }
+    .logo { font-size: 1.5rem; }
+    .nav { gap: 10px; margin-left: 20px; }
+    .nav a { padding: 6px 10px; font-size: 0.9rem; }
+    .jobs-with-filter { flex-direction: column; align-items: center; }
+    .filter-sidebar { max-width: 100%; width: 100%; margin-top: 20px; }
+    .why-us-items { gap: 40px; }
+}
+
+
+@media(max-width:768px){
+    /* Отключаем полоски на телефоне */
+    body::before, body::after { display: none; }
+
+
+    main { width: 100%; padding: 10px !important; }
+    body { font-size: 14px; }
+
+
+    .header { flex-direction: column; padding: 10px; gap: 10px; }
+    .logo { font-size: 1.4rem; text-align: center; width: 100%; }
+    .nav { width: 100%; justify-content: center; gap: 5px; margin-left: 0; }
+    .nav a { padding: 8px 12px; font-size: 0.85rem; flex: 0 1 auto; }
+    .header-info { width: 100%; justify-content: center; font-size: 0.85rem; gap: 10px; }
+
+
+    .account-box, .add-box, .job-form-box, .about-box, .container {
+        width: 95%; padding: 20px; max-width: 100%;
+    }
+    .account-box h1, .add-box h1, .job-form-box h1, .about-box h1 { font-size: 1.5rem; }
+
+
+    .job-card { padding: 15px; margin: 8px 0; }
+    .job-card h4 { font-size: 1.1rem; }
+    .calendar-box { width: 95%; max-width: 100%; padding: 10px; margin: 10px auto; }
+    .calendar-box h2 { font-size: 1.2rem; }
+
+
+    .why-us { padding: 40px 15px 50px; }
+    .why-us-title { font-size: 1.8rem; }
+
+
+    .footer-links a { display: block; margin: 10px 0; }
+    .footer-box { padding: 10px 20px; }
+}
+
+
+@media(max-width:480px){
+    .banner { font-size: 0.9rem; padding: 8px 5px; }
+    .logo { font-size: 1.2rem; }
+    .nav a { padding: 6px 8px; font-size: 0.8rem; }
+    .account-box, .add-box, .job-form-box, .about-box { padding: 15px; }
+    .job-card { padding: 12px; }
+}
+/* 
+   АДАПТАЦИЯ ПОД НОУТБУКИ (1280–1440px)
+*/
+
+@media (max-width: 1440px) {
+
+    /* Основной контейнер */
+    main {
+        width: 90%;
+        max-width: 1280px;
+    }
+
+    /* Боковые полосы — уже */
+    body::before,
+    body::after {
+        width: 6%;
+    }
+
+    /* Шапка */
+    .header {
+        max-width: 1280px;
+        padding: 12px 20px;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+    }
+
+    /* Меню */
+    .nav {
+        gap: 12px;
+        margin-left: 20px;
+    }
+
+    .nav a {
+        font-size: 0.95rem;
+        padding: 7px 10px;
+    }
+
+    /* Блок вакансий + фильтр */
+    .jobs-with-filter {
+        gap: 30px;
+    }
+
+    .filter-sidebar {
+        max-width: 280px;
+    }
+
+    /* Карточки вакансий */
+    .job-card {
+        padding: 18px;
+    }
+
+    /* Блоки */
+    .account-box,
+    .add-box,
+    .job-form-box,
+    .about-box,
+    .container {
+        max-width: 900px;
+    }
+}
+/* 
+    ПОД НОУТБУКИ
+   (1366–1600px)
+ */
+
+@media (max-width: 1600px) {
+
+    /* Ослабляем боковые декоративные полосы */
+    body::before,
+    body::after {
+        width: 3%;
+        opacity: 0.7;
+    }
+
+    /* Делаем основной контент визуально шире */
+    main {
+        width: 94%;
+        max-width: 1400px;
+    }
+
+    /* Чуть растягиваю сетку вакансий */
+    .jobs-with-filter {
+        gap: 40px;
+        align-items: stretch;
+    }
+
+    /* Фильтр — компактнее */
+    .filter-sidebar {
+        max-width: 260px;
+    }
+
+    /* Карточки — больше  */
+    .job-card {
+        padding: 22px;
+    }
+}
+
+
+/* под 1366x768  */
+
+
+@media (max-width: 1366px) {
+
+    body::before,
+    body::after {
+        width: 2%;
+        opacity: 0.5;
+    }
+
+    main {
+        width: 96%;
+    }
+}
